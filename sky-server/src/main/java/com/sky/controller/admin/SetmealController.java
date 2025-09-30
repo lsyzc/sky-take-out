@@ -12,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -63,7 +62,6 @@ public class SetmealController {
     public Result startOrStop(@PathVariable Integer status,Long id) {
         setmealService.startOrStop(status,id);
         return Result.success();
-
     }
 
 }
