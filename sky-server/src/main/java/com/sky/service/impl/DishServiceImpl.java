@@ -116,6 +116,28 @@ public class DishServiceImpl implements DishService {
     }
 
     /**
+     * 启停菜品
+     * @param status
+     * @param id
+     */
+    @Override
+    public void startOrStop(Integer status, Long id) {
+        // 如果 套餐中有该菜品不能停售
+        if (status == StatusConstant.DISABLE) {
+            Long setmealIdByDishId = setmealDishMapper.getSetmealIdByDishId(id);
+            if (setmealIdByDishId != null) {
+                throw new DeletionNotAllowedException(MessageConstant.DISH_BE_RELATED_BY_SETMEAL);
+            }
+        }
+        Dish dish = Dish.builder()
+                .id(id)
+                .status(status)
+                .build();
+        dishMapper.update(dish);
+
+    }
+
+    /**
      * 条件查询菜品和口味
      * @param dish
      * @return

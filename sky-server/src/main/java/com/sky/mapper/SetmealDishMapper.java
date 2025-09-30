@@ -26,4 +26,7 @@ public interface SetmealDishMapper {
     List<SetmealDish> getBySetmealId(Long setmealId);
 
     List<Long> getSetmealIdsByDishIds(Long[] dishIds);
+
+    @Select("select setmeal_id from setmeal_dish where dish_id = #{id}")
+    Long getSetmealIdByDishId(Long id);
 }
